@@ -29,6 +29,9 @@
         <activity android:name=".activity.ShowLinkman">
         </activity>
         <activity android:name=".activity.Search"></activity>
+        <activity android:name=".activity.EditLinkman"></activity>
+        <activity android:name=".activity.GroupShow"></activity>
+        <activity android:name=".activity.GroupActivity"></activity>
     </application>
 
 </manifest>

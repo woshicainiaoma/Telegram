@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.dell.tele.util.TitleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.example.dell.tele.util.TitleLayout>
+
 
 
     <LinearLayout
-        android:background="#eb4f38"
+        android:background="#dedede"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -15,12 +21,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
+            <!--<EditText-->
+                <!--android:id="@+id/search_edit"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="@string/name"-->
+                <!--android:imeOptions="actionSearch"/>-->
             <EditText
                 android:id="@+id/search_edit"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:drawableLeft="@drawable/search_icon"
+                android:drawablePadding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="dhsd"
-                android:imeOptions="actionSearch"/>
+                android:background="@drawable/search_edittext_shape"
+                android:textSize="16sp"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:hint="搜索联系人"/>
+
         </FrameLayout>
      <ListView
          android:id="@+id/show_result"

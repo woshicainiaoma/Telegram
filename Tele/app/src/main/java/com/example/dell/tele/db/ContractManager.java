@@ -60,16 +60,52 @@ public class ContractManager {
 
         values.clear();
         values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
+        values.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, contact.getName());
+        context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+
+        values.clear();
+        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
         values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
         values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, contact.getPhone());
         context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
 
-        //ContentValues valuesData2 = new ContentValues();
         values.clear();
         values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
-        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
-        values.put(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, contact.getName());
+        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE);
+        values.put(ContactsContract.CommonDataKinds.Email.ADDRESS, contact.getEmail());
         context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+
+        values.clear();
+        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE);
+        values.put(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, contact.getAdress());
+        context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+
+        values.clear();
+        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.TYPE_HOME);
+        values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, contact.getHomePhone());
+        context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+
+        values.clear();
+        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
+        values.put(ContactsContract.CommonDataKinds.Phone.NUMBER, contact.getWorkPhone());
+        context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+
+//        values.clear();
+//        values.put(ContactsContract.Data.RAW_CONTACT_ID, rawContactId);
+//        values.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.GroupMembership.CONTENT_ITEM_TYPE);
+//        values.put(ContactsContract.CommonDataKinds.GroupMembership.GROUP_ROW_ID, contact.getPhone());
+//        context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
+//        //ContentValues valuesData2 = new ContentValues();
+        values.clear();
+        values.put(ContactsContract.CommonDataKinds.GroupMembership.RAW_CONTACT_ID, rawContactId);
+        values.put(ContactsContract.CommonDataKinds.GroupMembership.GROUP_ROW_ID, contact.getGroupId());
+        values.put(ContactsContract.CommonDataKinds.GroupMembership.MIMETYPE,
+                ContactsContract.CommonDataKinds.GroupMembership.CONTENT_ITEM_TYPE);
+       context.getContentResolver().insert(ContactsContract.Data.CONTENT_URI, values);
 
 
     }
@@ -186,6 +222,37 @@ public class ContractManager {
         }
         return contacts;
     }
+
+
+    public static List<ContractBean> getFuzzyQueryByName(String key, Context context){
+
+        List<ContractBean> contacts = new ArrayList<ContractBean>();
+        ContentResolver cr = context.getContentResolver();
+        String[] projection = {ContactsContract.PhoneLookup.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER};
+
+        Cursor cursor = cr.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                projection,
+                ContactsContract.Contacts.DISPLAY_NAME + " like " + "'%" + key + "%'",
+                null, null);
+        ContractBean contact = null;
+        while(cursor.moveToNext()){
+            String name = cursor.getString(
+                    cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            String number = cursor.getString(
+                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            contact.setName(name);
+            contact.setPhone(number);
+            contacts.add(contact);
+        }
+        cursor.close();
+
+        return contacts;
+
+    }
+
+
 
 
 }

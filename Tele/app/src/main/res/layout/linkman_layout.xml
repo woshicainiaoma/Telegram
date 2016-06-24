@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
     <com.example.dell.tele.util.TitleLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,6 +26,52 @@
         android:hint="姓名"
         android:paddingLeft="15dp"
         android:background="@drawable/shape_gray"/>
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:hint="E-Mail"
+        android:paddingLeft="15dp"
+        android:background="@drawable/shape_gray"/>
+
+    <EditText
+        android:id="@+id/edit_adress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:hint="地址"
+        android:paddingLeft="15dp"
+        android:background="@drawable/shape_gray"/>
+
+    <EditText
+        android:id="@+id/edit_homephone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:hint="家庭"
+        android:paddingLeft="15dp"
+        android:background="@drawable/shape_gray"/>
+    <EditText
+        android:id="@+id/edit_workphone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:hint="工作"
+        android:paddingLeft="15dp"
+        android:background="@drawable/shape_gray"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_groupname">
+    </Spinner>
+
+    <ListView
+        android:id="@+id/lv_groupname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
     <Button
         android:id="@+id/add_link"
         android:layout_width="match_parent"

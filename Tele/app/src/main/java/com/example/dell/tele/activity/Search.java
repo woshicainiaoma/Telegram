@@ -11,7 +11,7 @@ import com.example.dell.tele.R;
 import com.example.dell.tele.db.ContractManager;
 import com.example.dell.tele.model.ContractBean;
 import com.example.dell.tele.ui.SearchView;
-import com.example.dell.tele.util.ContactAdapter;
+import com.example.dell.tele.util.ShowLinkmanAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class Search extends Activity implements SearchView.SearchViewListener {
     /**
      * 搜索结果列表adapter
      */
-    private ContactAdapter resultAdapter;
+    private ShowLinkmanAdapter resultAdapter;
 
     private List<ContractBean> dbData;
 
@@ -188,7 +188,7 @@ public class Search extends Activity implements SearchView.SearchViewListener {
         }
 
         if (resultAdapter == null) {
-            resultAdapter = new  ContactAdapter(this, resultData);;
+            resultAdapter = new ShowLinkmanAdapter(this, resultData);;
         } else {
             resultAdapter.notifyDataSetChanged();
         }

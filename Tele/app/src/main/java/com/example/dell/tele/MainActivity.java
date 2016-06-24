@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dell.tele.activity.AddLinkman;
+import com.example.dell.tele.activity.GroupActivity;
 import com.example.dell.tele.activity.Search;
 import com.example.dell.tele.activity.ShowLinkman;
 import com.example.dell.tele.db.ContractManager;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private List<ContractBean> contacts = new ArrayList<ContractBean>();
     private ContactAdapter adapter;
     private Button addBtn;
-
+    private Button addSearch;
+    private Button groupShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         lv_view = (ListView) findViewById(R.id.poeple);
         addBtn = (Button) findViewById(R.id.add);
+        addSearch = (Button) findViewById(R.id.add_search);
+        groupShow =(Button) findViewById(R.id.group_list);
         adapter = new ContactAdapter(this, contacts);
         lv_view.setAdapter(adapter);
         setContactsData();
@@ -55,7 +60,24 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddLinkman.class);
+                startActivity(intent);
+            }
+        });
+
+        addSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 Intent intent = new Intent(MainActivity.this, Search.class);
+                startActivity(intent);
+            }
+        });
+
+        groupShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,GroupActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,4 +118,15 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setContactsData();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setContactsData();
+    }
 }
